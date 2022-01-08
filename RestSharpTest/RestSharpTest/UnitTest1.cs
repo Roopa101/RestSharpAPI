@@ -44,7 +44,7 @@ namespace RestSharpTest
             }
         }
 
-
+        //Inserting The Records 
         [TestMethod]
         public void givenEmployee_OnPost_ShouldReturnAddedEmployee()
         {
@@ -62,25 +62,26 @@ namespace RestSharpTest
             Assert.AreEqual(15000, dataResponse.Salary);
 
         }
-    //    [TestMethod]
-    //    public void OnCallingPutAPI_ReturnEmployeeObject()
-    //    {
-    //        RestRequest request = new RestRequest("/employees/7", Method.PUT);
-    //        JsonObject jsonObj = new JsonObject();
-    //        jsonObj.Add("name", "Clark");
-    //        jsonObj.Add("salary", "15000");
-    //        request.AddParameter("application/json", jsonObj, ParameterType.RequestBody);
+        //Update the Record
+        [TestMethod]
+        public void OnCallingPUTAPI_ReturnEmployeeObject()
+        {
+            RestRequest request = new RestRequest("/employees/4", Method.PUT);
+            JsonObject jsonObj = new JsonObject();
+            jsonObj.Add("name", "Lokesh");
+            jsonObj.Add("salary", "25000");
+            request.AddParameter("application/json", jsonObj, ParameterType.RequestBody);
 
-     //       IRestResponse response = client.Execute(request);
+            IRestResponse response = client.Execute(request);
 
-    //        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-    //        Employee employee = JsonConvert.DeserializeObject<Employee>(response.Content);
-    //        Assert.AreEqual("Clark", employee.name);
-    //        Assert.AreEqual("15000", employee.Salary);
-    //        Console.WriteLine(response.Content);
-    //    }
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Employee employee = JsonConvert.DeserializeObject<Employee>(response.Content);
+            Assert.AreEqual("Lokesh", employee.name);
+            Assert.AreEqual("25000", employee.Salary);
+            Console.WriteLine(response.Content);
+        }
 
-      
+        //Delete Record
 
         [TestMethod]
         public void OnCallingDeleteAPI_ReturnSuccessStatus()
